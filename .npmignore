@@ -1,7 +1,0 @@
-dist/
-.cache/
-src/
-demo/
-package-lock.json
-tsconfig.json
-*.tgz
