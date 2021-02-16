@@ -1,7 +1,7 @@
 {
-  "name": "react-mui-auth",
+  "name": "react-mui-auth-page",
   "version": "1.0.0",
-  "description": "React Auth Template for fast Development",
+  "description": "React Auth for fast Development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arpitBhalla/react-mui-auth.git"
+    "url": "git+https://github.com/arpitBhalla/react-mui-auth-page.git"
   },
   "keywords": [
     "React",
@@ -23,9 +23,9 @@
   "author": "Arpit Bhalla",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/arpitBhalla/react-mui-auth/issues"
+    "url": "https://github.com/arpitBhalla/react-mui-auth-page/issues"
   },
-  "homepage": "https://github.com/arpitBhalla/react-mui-auth#readme",
+  "homepage": "https://github.com/arpitBhalla/react-mui-auth-page#readme",
   "dependencies": {
     "@material-ui/core": "^4.11.3"
   },
