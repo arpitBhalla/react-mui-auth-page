@@ -1,6 +1,6 @@
 {
   "name": "react-mui-auth-page",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "React Auth for fast Development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,7 +8,7 @@
     "lib"
   ],
   "scripts": {
-    "dev": "parcel demo/index.html --port 3000",
+    "dev": "parcel example/index.html --port 3000",
     "build": "tsc"
   },
   "repository": {

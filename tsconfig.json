@@ -2,14 +2,14 @@
     "compilerOptions": {
         "outDir": "lib",
         "module": "ESNext",
-        "target": "ES6",
+        "target": "ES2016",
         "lib": [
             "ES6",
             "DOM",
             "ES2016",
             "ES2020"
         ],
-        "sourceMap": true,
+        "sourceMap": false,
         "allowJs": false,
         "jsx": "react",
         "declaration": true,

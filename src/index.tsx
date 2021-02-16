@@ -31,7 +31,7 @@ export const DialogAuth: React.FC<Props> = ({ open, onClose }) => {
   );
 };
 
-export const SimpleAuth: React.FC<Props> = ({}) => {
+export const BoxAuth: React.FC<Props> = ({}) => {
   return (
     <Box height="100vh">
       <Grid container>
