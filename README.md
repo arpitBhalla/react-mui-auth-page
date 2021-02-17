@@ -2,11 +2,15 @@
 
 ![npm](https://img.shields.io/npm/v/react-mui-auth-page?style=flat-square) ![npm](https://img.shields.io/npm/dm/react-mui-auth-page?style=flat-square) ![NPM](https://img.shields.io/npm/l/react-mui-auth-page?style=flat-square) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/react-mui-auth-page?style=flat-square) ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/react-mui-auth-page?style=flat-square)
 
-## Getting Started
+## Getting Started :rocket:
 
 `npm i react-mui-auth-page`
 
-## [Demo](https://react-mui-auth-page.surge.sh)
+## Demo
+[Web Demo](https://react-mui-auth-page.surge.sh)
+
+[CodeSandbox](https://codesandbox.io/s/react-mui-auth-page-demo-i5yxe?file=/src/App.js)
+
 
 ## Usage
 
