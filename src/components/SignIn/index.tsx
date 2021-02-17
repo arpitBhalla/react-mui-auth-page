@@ -14,14 +14,13 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
 import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
 export interface SignInProps {
-  handleSignIn: (signInVars: { email: string; password: string }) => void;
+  handleSignIn: (signInVars: { email: string; password: string }) => any;
   handleSocial: {
     Github?: () => void;
     Linkedin?: () => void;
     Twitter?: () => void;
     Facebook?: () => void;
   };
-  validate?: boolean;
   goToForget: () => any;
 }
 
@@ -30,7 +29,6 @@ const INITIAL = { text: "", error: "" };
 const SignIn: React.FC<SignInProps> = ({
   goToForget,
   handleSignIn,
-  validate = true,
   handleSocial,
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
@@ -38,9 +36,9 @@ const SignIn: React.FC<SignInProps> = ({
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleSubmit = (): void => {
-    if (validate) {
-    }
-    handleSignIn({ email: email.text, password: password.text });
+    if (typeof handleSignIn !== "function") handleSignIn = () => {};
+
+    return handleSignIn({ email: email.text, password: password.text });
   };
   const tooglePassword = () => {
     setShowPassword(!showPassword);
@@ -84,11 +82,17 @@ const SignIn: React.FC<SignInProps> = ({
           }}
         />
         <FormHelperText>{password.error || " "}</FormHelperText>
-        <Typography variant="button" color="textPrimary" onClick={goToForget}>
-          Forget Password
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          align="right"
+          style={{ cursor: "pointer" }}
+          onClick={goToForget}
+        >
+          Forget Password?
         </Typography>
       </FormControl>
-      <FormControl margin="none" fullWidth>
+      <FormControl margin="normal" fullWidth>
         <Button
           onClick={handleSubmit}
           style={{ textTransform: "none" }}

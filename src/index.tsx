@@ -52,7 +52,7 @@ export const FullWidth: React.FC<FullWidthProps> = ({ ...props }) => {
   return (
     <Box p={9}>
       <Container maxWidth="md">
-        <Box boxShadow="0px 0px 10px 3px #ddd" p={3}>
+        <Box boxShadow="0px 0px 10px 3px #ddd" p={3} width="100%" height="100%">
           <Grid container spacing={1}>
             <Grid item xs={false} md={7}>
               <Typography variant="h4" color="textSecondary">

@@ -1,6 +1,6 @@
 {
   "name": "react-mui-auth-page",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React Auth for fast Development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "dev": "parcel example/index.html --port 3000",
+    "dev:build": "parcel build example/index.html --no-source-maps",
+    "dev:deploy": "cd dist && echo 'https://react-mui-auth-page.surge.sh'> CNAME && surge .",
     "build": "tsc"
   },
   "repository": {

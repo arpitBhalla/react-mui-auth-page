@@ -7,7 +7,12 @@ const Dialog = () => {
   const handleSignIn = ({ email, password }) => {
     console.log({ email, password });
   };
-
+  const handleSignUp = ({ email, name, password }) => {
+    console.log({ email, name, password });
+  };
+  const handleForget = ({ email }) => {
+    console.log({ email });
+  };
   const handleLinkedIn = () => {
     console.log("Do Linkedin call");
   };
@@ -26,10 +31,12 @@ const Dialog = () => {
       >
         Open Dialog
       </Button>
-
+      Check The console for result
       <DialogAuth
         open={open}
         onClose={() => setOpen(false)}
+        handleSignUp={handleSignUp}
+        handleForget={handleForget}
         handleSignIn={handleSignIn}
         handleSocial={{
           Linkedin: handleLinkedIn,

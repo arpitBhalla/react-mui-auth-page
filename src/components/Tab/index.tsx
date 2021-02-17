@@ -2,9 +2,9 @@ import * as React from "react";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import SignIn, { SignInProps } from "../SignIn";
-import SignUp from "../SignUp";
-
-export interface AuthProps extends SignInProps {
+import SignUp, { SignUpProps } from "../SignUp";
+import Forget, { ForgetProps } from "../Forget";
+export interface AuthProps extends SignInProps, SignUpProps, ForgetProps {
   hideTabs?: boolean;
 }
 
@@ -18,7 +18,10 @@ const App: React.FC<AuthProps> = ({ hideTabs, ...props }) => {
   const goToForget = () => {
     setAuthIndex(2);
   };
-  if (authIndex === 2) return <>Forget</>;
+  const gobackToSignIn = () => {
+    setAuthIndex(0);
+  };
+  if (authIndex === 2) return <Forget {...{ ...props, gobackToSignIn }} />;
   return (
     <>
       <Tabs

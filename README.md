@@ -6,12 +6,52 @@
 
 `npm i react-mui-auth-page`
 
+## [Demo](https://react-mui-auth-page.surge.sh)
+
 ## Examples
 
 #### Dialog
 
 ```js
+import React from "react";
+import { DialogAuth } from "react-mui-auth-page";
+import Button from "@material-ui/core/Button";
 
+const Dialog = () => {
+  const handleSignIn = ({ email, password }) => {
+    console.log({ email, password });
+  };
+  const handleSignUp = ({ email, name, password }) => {
+    console.log({ email, name, password });
+  };
+  const handleForget = ({ email }) => {
+    console.log({ email });
+  };
+  const handleLinkedIn = () => {
+    console.log("Do Linkedin call");
+  };
+  const handleGithub = () => {
+    console.log("Do Github call");
+  };
+
+  return (
+    <>
+      <DialogAuth
+        open={true}
+        onClose={() => {}}
+        handleSignUp={handleSignUp}
+        handleForget={handleForget}
+        handleSignIn={handleSignIn}
+        handleSocial={{
+          Linkedin: handleLinkedIn,
+          Github: handleGithub,
+        }}
+      />
+    </>
+  );
+};
+
+export default Dialog;
 ```
 
 ## Local Run

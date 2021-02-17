@@ -10,15 +10,31 @@ import IconButton from "@material-ui/core/IconButton";
 import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
 import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
 
-interface Props {}
+export interface SignUpProps {
+  handleSignUp: (signUpVars: {
+    name: string;
+    email: string;
+    password: string;
+  }) => any;
+}
 
 const INITIAL = { text: "", error: "" };
 
-const SignUp: React.FC<Props> = ({}) => {
+const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
   const [name, setName] = React.useState(INITIAL);
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
   const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleSubmit = async () => {
+    if (typeof handleSignUp !== "function") handleSignUp = () => {};
+
+    return handleSignUp({
+      name: name.text,
+      email: email.text,
+      password: password.text,
+    });
+  };
 
   const tooglePassword = () => {
     setShowPassword(!showPassword);
@@ -82,6 +98,7 @@ const SignUp: React.FC<Props> = ({}) => {
           variant="contained"
           color="primary"
           fullWidth
+          onClick={handleSubmit}
         >
           Register
         </Button>
