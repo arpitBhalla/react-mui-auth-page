@@ -3,7 +3,7 @@ import { DialogAuth } from "../src";
 import Button from "@material-ui/core/Button";
 
 const Dialog = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const handleSignIn = ({ email, password }) => {
     console.log({ email, password });
   };

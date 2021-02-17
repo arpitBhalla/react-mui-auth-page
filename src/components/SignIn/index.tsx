@@ -10,7 +10,9 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-
+import InputAdornment from "@material-ui/core/InputAdornment";
+import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
+import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
 export interface SignInProps {
   handleSignIn: (signInVars: { email: string; password: string }) => void;
   handleSocial: {
@@ -19,18 +21,30 @@ export interface SignInProps {
     Twitter?: () => void;
     Facebook?: () => void;
   };
+  validate?: boolean;
+  goToForget: () => any;
 }
 
 const INITIAL = { text: "", error: "" };
 
-const SignIn: React.FC<SignInProps> = ({ handleSignIn, handleSocial }) => {
+const SignIn: React.FC<SignInProps> = ({
+  goToForget,
+  handleSignIn,
+  validate = true,
+  handleSocial,
+}) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleSubmit = (): void => {
+    if (validate) {
+    }
     handleSignIn({ email: email.text, password: password.text });
   };
-
+  const tooglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <Box p={2}>
       <FormControl margin="none" fullWidth error={Boolean(email.error)}>
@@ -54,9 +68,23 @@ const SignIn: React.FC<SignInProps> = ({ handleSignIn, handleSocial }) => {
           onChange={(e) => {
             setPassword({ text: e.target.value, error: "" });
           }}
+          type={!showPassword ? "password" : "text"}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton aria-label="show password" onClick={tooglePassword}>
+                  {!showPassword ? (
+                    <HiddenPasswordIcon />
+                  ) : (
+                    <ShownPasswordIcon />
+                  )}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <FormHelperText>{password.error || " "}</FormHelperText>
-        <Typography variant="caption" color="textPrimary">
+        <Typography variant="button" color="textPrimary" onClick={goToForget}>
           Forget Password
         </Typography>
       </FormControl>

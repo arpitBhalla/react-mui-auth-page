@@ -15,7 +15,10 @@ const App: React.FC<AuthProps> = ({ hideTabs, ...props }) => {
     event.preventDefault();
     setAuthIndex(tabValue);
   };
-
+  const goToForget = () => {
+    setAuthIndex(2);
+  };
+  if (authIndex === 2) return <>Forget</>;
   return (
     <>
       <Tabs
@@ -31,7 +34,7 @@ const App: React.FC<AuthProps> = ({ hideTabs, ...props }) => {
       {(() => {
         switch (authIndex) {
           case 0:
-            return <SignIn {...props} />;
+            return <SignIn {...{ ...props, goToForget }} />;
           case 1:
             return <SignUp {...props} />;
           default:
