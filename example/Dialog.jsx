@@ -1,5 +1,5 @@
 import React from "react";
-import { DialogAuth } from "../src";
+import { DialogAuth, BoxAuth, FullWidth } from "../src";
 import Button from "@material-ui/core/Button";
 
 const Dialog = () => {

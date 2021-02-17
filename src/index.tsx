@@ -48,7 +48,7 @@ export const BoxAuth: React.FC<BoxProps> = ({ ...props }) => {
 };
 
 interface FullWidthProps extends AuthProps {}
-export const FullWidth: React.FC<FullWidthProps> = ({ ...props }) => {
+export const FullWidthAuth: React.FC<FullWidthProps> = ({ ...props }) => {
   return (
     <Box p={9}>
       <Container maxWidth="md">
