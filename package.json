@@ -1,6 +1,6 @@
 {
   "name": "react-mui-auth-page",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "React Auth for fast Development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -20,14 +20,17 @@
   "keywords": [
     "React",
     "Material-ui",
-    "Auth"
+    "Login-page",
+    "Signin page",
+    "SignUp",
+    "Auth-page"
   ],
   "author": "Arpit Bhalla",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/arpitBhalla/react-mui-auth-page/issues"
   },
-  "homepage": "https://github.com/arpitBhalla/react-mui-auth-page#readme",
+  "homepage": "https://react-mui-auth-page.surge.sh/",
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2"
