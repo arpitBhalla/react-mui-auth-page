@@ -1,21 +1,21 @@
 import * as React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import TabAuth from "./components/Tab";
+import TabAuth, { AuthProps } from "./components/Tab";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 
-interface Props {
+interface DialogProps extends AuthProps {
   open: boolean;
   onClose: () => void;
-  onSignIn: (email: string, password: string) => void;
-  onSignUp: (email: string, password: string) => void;
-  variant: "dialog" | "contained" | "simple";
 }
-
-export const DialogAuth: React.FC<Props> = ({ open, onClose }) => {
+export const DialogAuth: React.FC<DialogProps> = ({
+  open,
+  onClose,
+  ...props
+}) => {
   return (
     <Dialog
       maxWidth="xs"
@@ -25,20 +25,21 @@ export const DialogAuth: React.FC<Props> = ({ open, onClose }) => {
       aria-labelledby="auth dialog"
     >
       <DialogContent>
-        <TabAuth />
+        <TabAuth {...props} />
       </DialogContent>
     </Dialog>
   );
 };
 
-export const BoxAuth: React.FC<Props> = ({}) => {
+interface BoxProps extends AuthProps {}
+export const BoxAuth: React.FC<BoxProps> = ({ ...props }) => {
   return (
     <Box height="100vh">
       <Grid container>
         <Grid item xs={false} md={4} />
         <Grid item xs={12} md={4}>
           <Box p={2} boxShadow={2}>
-            <TabAuth />
+            <TabAuth {...props} />
           </Box>
         </Grid>
       </Grid>
@@ -46,7 +47,8 @@ export const BoxAuth: React.FC<Props> = ({}) => {
   );
 };
 
-export const FullWidth: React.FC<Props> = ({}) => {
+interface FullWidthProps extends AuthProps {}
+export const FullWidth: React.FC<FullWidthProps> = ({ ...props }) => {
   return (
     <Box p={9}>
       <Container maxWidth="md">
@@ -58,7 +60,7 @@ export const FullWidth: React.FC<Props> = ({}) => {
               </Typography>
             </Grid>
             <Grid item xs={12} md={5}>
-              <TabAuth />
+              <TabAuth {...props} />
             </Grid>
           </Grid>
         </Box>

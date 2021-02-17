@@ -1,22 +1,21 @@
 import React from "react";
 import ReactDom from "react-dom";
-import { DialogAuth, FullWidth, BoxAuth } from "../src/index";
+import DialogAuth from "./Dialog";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-const App = () => {
-  const [open, setOpen] = React.useState(true);
-  return (
-    <>
-      <FullWidth />
-      <DialogAuth open={open} onClose={() => setOpen(false)} />
-    </>
-  );
-};
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#007fff",
+    },
+  },
+});
 
 ReactDom.render(
-  <>
+  <ThemeProvider theme={theme}>
     <CssBaseline />
-    <App />
-  </>,
+    <DialogAuth />
+  </ThemeProvider>,
   document.getElementById("root")
 );

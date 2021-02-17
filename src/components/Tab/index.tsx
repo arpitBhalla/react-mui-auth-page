@@ -1,12 +1,14 @@
 import * as React from "react";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import SignIn from "../SignIn";
+import SignIn, { SignInProps } from "../SignIn";
 import SignUp from "../SignUp";
 
-interface Props {}
+export interface AuthProps extends SignInProps {
+  hideTabs?: boolean;
+}
 
-const App: React.FC<Props> = ({}) => {
+const App: React.FC<AuthProps> = ({ hideTabs, ...props }) => {
   const [authIndex, setAuthIndex] = React.useState(0);
 
   const tabChange = (event: React.ChangeEvent, tabValue: number): void => {
@@ -29,9 +31,9 @@ const App: React.FC<Props> = ({}) => {
       {(() => {
         switch (authIndex) {
           case 0:
-            return <SignIn />;
+            return <SignIn {...props} />;
           case 1:
-            return <SignUp />;
+            return <SignUp {...props} />;
           default:
             return null;
         }

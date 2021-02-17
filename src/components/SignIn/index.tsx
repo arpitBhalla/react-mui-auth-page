@@ -11,13 +11,25 @@ import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
-interface Props {}
+export interface SignInProps {
+  handleSignIn: (signInVars: { email: string; password: string }) => void;
+  handleSocial: {
+    Github?: () => void;
+    Linkedin?: () => void;
+    Twitter?: () => void;
+    Facebook?: () => void;
+  };
+}
 
 const INITIAL = { text: "", error: "" };
 
-const SignUp: React.FC<Props> = ({}) => {
+const SignIn: React.FC<SignInProps> = ({ handleSignIn, handleSocial }) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
+
+  const handleSubmit = (): void => {
+    handleSignIn({ email: email.text, password: password.text });
+  };
 
   return (
     <Box p={2}>
@@ -44,9 +56,13 @@ const SignUp: React.FC<Props> = ({}) => {
           }}
         />
         <FormHelperText>{password.error || " "}</FormHelperText>
+        <Typography variant="caption" color="textPrimary">
+          Forget Password
+        </Typography>
       </FormControl>
       <FormControl margin="none" fullWidth>
         <Button
+          onClick={handleSubmit}
           style={{ textTransform: "none" }}
           size="large"
           variant="contained"
@@ -58,24 +74,43 @@ const SignUp: React.FC<Props> = ({}) => {
       </FormControl>
       <br />
       <br />
-      <Typography variant="subtitle2" color="textSecondary" align="center">
-        or continue with
-      </Typography>
+      {(typeof handleSocial?.Twitter === "function" ||
+        typeof handleSocial?.Facebook === "function" ||
+        typeof handleSocial?.Linkedin === "function" ||
+        typeof handleSocial?.Github === "function") && (
+        <Typography variant="subtitle2" color="textSecondary" align="center">
+          or continue with
+        </Typography>
+      )}
       <Box display="flex" justifyContent="center">
-        <IconButton aria-label="google login" onClick={() => {}}>
-          <TwitterIcon htmlColor="#55acee" />
-        </IconButton>
-        <IconButton aria-label="google login" onClick={() => {}}>
-          <FacebookIcon htmlColor="#3b5999" />
-        </IconButton>
-        <IconButton aria-label="google login" onClick={() => {}}>
-          <LinkedInIcon htmlColor="#0077B5" />
-        </IconButton>
-        <IconButton aria-label="google login" onClick={() => {}}>
-          <GitHubIcon htmlColor="#131418" />
-        </IconButton>
+        {typeof handleSocial?.Twitter === "function" && (
+          <IconButton aria-label="google login" onClick={handleSocial?.Twitter}>
+            <TwitterIcon htmlColor="#55acee" />
+          </IconButton>
+        )}
+        {typeof handleSocial?.Facebook === "function" && (
+          <IconButton
+            aria-label="google login"
+            onClick={handleSocial?.Facebook}
+          >
+            <FacebookIcon htmlColor="#3b5999" />
+          </IconButton>
+        )}
+        {typeof handleSocial?.Linkedin === "function" && (
+          <IconButton
+            aria-label="google login"
+            onClick={handleSocial?.Linkedin}
+          >
+            <LinkedInIcon htmlColor="#0077B5" />
+          </IconButton>
+        )}
+        {typeof handleSocial?.Github === "function" && (
+          <IconButton aria-label="google login" onClick={handleSocial?.Github}>
+            <GitHubIcon htmlColor="#131418" />
+          </IconButton>
+        )}
       </Box>
     </Box>
   );
 };
-export default SignUp;
+export default SignIn;
