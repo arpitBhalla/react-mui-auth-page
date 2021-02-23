@@ -12,6 +12,7 @@
     "predevDeploy": "parcel build example/index.html --no-source-maps -d build",
     "devDeploy": "cd build && echo 'https://react-mui-auth-page.surge.sh'> CNAME && surge .",
     "postdevDeploy": "rm -rf build",
+    "prepublish": "tsc ",
     "dumpVersion": " node scripts/dump-version.js"
   },
   "repository": {

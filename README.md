@@ -7,10 +7,10 @@
 `npm i react-mui-auth-page`
 
 ## Demo
+
 [Web Demo](https://react-mui-auth-page.surge.sh)
 
 [CodeSandbox](https://codesandbox.io/s/react-mui-auth-page-demo-i5yxe?file=/src/App.js)
-
 
 ## Usage
 
@@ -18,52 +18,60 @@
 import { DialogAuth, BoxAuth, FullWidthAuth } from "react-mui-auth-page";
 ```
 
-## Examples
+## API's
 
-<img src='./example/Demo.png'>
+| Prop Name     | Type                            | Required | Default Value |
+| ------------- | ------------------------------- | -------- | ------------- |
+| hideTabs      | Boolean                         | Yes      | False         |
+| open          | Boolean                         | Yes      |               |
+| onClose       | Function                        | Yes      |               |
+| logoName      | string                          |          |               |
+| logoComponent | React Children                  |          |               |
+| handleSignUp  | Function                        | Yes      |
+| handleForget  | Function                        | Yes      |
+| handleSignIn  | Function                        | Yes      |
+| handleSocial  | [Social Object](#Social-Object) |
+
+### Social Object
+
+| Prop Name | Type     |
+| --------- | -------- |
+| Linkedin  | Function |
+| Github    | Function |
+| Facebook  | Function |
+| Twitter   | Function |
+
+## ScreenShots
+
+**With Tabs**
+<img src='./example/Dialog with Tabs.png'>
+
+**WithOut Tabs**
+<img src='./example/Dialog without Tabs.png'>
 
 #### Dialog
 
 ```js
 import React from "react";
 import { DialogAuth } from "react-mui-auth-page";
-import Button from "@material-ui/core/Button";
 
-const Dialog = () => {
-  const handleSignIn = ({ email, password }) => {
-    console.log({ email, password });
-  };
-  const handleSignUp = ({ email, name, password }) => {
-    console.log({ email, name, password });
-  };
-  const handleForget = ({ email }) => {
-    console.log({ email });
-  };
-  const handleLinkedIn = () => {
-    console.log("Do Linkedin call");
-  };
-  const handleGithub = () => {
-    console.log("Do Github call");
-  };
-
+const MyDialogComponent = () => {
   return (
-    <>
-      <DialogAuth
-        open={true}
-        onClose={() => {}}
-        handleSignUp={handleSignUp}
-        handleForget={handleForget}
-        handleSignIn={handleSignIn}
-        handleSocial={{
-          Linkedin: handleLinkedIn,
-          Github: handleGithub,
-        }}
-      />
-    </>
+    <DialogAuth
+      open={true}
+      onClose={() => {}}
+      handleSignUp={() => {}}
+      handleForget={() => {}}
+      handleSignIn={() => {}}
+      handleSocial={{
+        Linkedin: () => {},
+        Github: () => {},
+      }}
+    />
   );
 };
 
-export default Dialog;
+export default MyDialogComponent;
 ```
 
 ## Local Run
