@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
 import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
+
 export interface SignInProps {
   handleSignIn: (signInVars: { email: string; password: string }) => any;
   handleSocial: {
@@ -21,7 +22,9 @@ export interface SignInProps {
     Twitter?: () => void;
     Facebook?: () => void;
   };
+  hideTabs?: boolean;
   goToForget: () => any;
+  goToSignUp: () => any;
 }
 
 const INITIAL = { text: "", error: "" };
@@ -29,7 +32,9 @@ const INITIAL = { text: "", error: "" };
 const SignIn: React.FC<SignInProps> = ({
   goToForget,
   handleSignIn,
+  goToSignUp,
   handleSocial,
+  hideTabs = false,
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
@@ -92,6 +97,7 @@ const SignIn: React.FC<SignInProps> = ({
           Forget Password?
         </Typography>
       </FormControl>
+
       <FormControl margin="normal" fullWidth>
         <Button
           onClick={handleSubmit}
@@ -104,8 +110,6 @@ const SignIn: React.FC<SignInProps> = ({
           Sign In
         </Button>
       </FormControl>
-      <br />
-      <br />
       {(typeof handleSocial?.Twitter === "function" ||
         typeof handleSocial?.Facebook === "function" ||
         typeof handleSocial?.Linkedin === "function" ||
@@ -142,6 +146,17 @@ const SignIn: React.FC<SignInProps> = ({
           </IconButton>
         )}
       </Box>
+      {hideTabs && (
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          align="center"
+          style={{ cursor: "pointer" }}
+          onClick={goToSignUp}
+        >
+          No Account? Create Now
+        </Typography>
+      )}
     </Box>
   );
 };

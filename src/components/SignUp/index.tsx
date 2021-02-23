@@ -6,9 +6,9 @@ import Box from "@material-ui/core/Box";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-
 import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
 import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
+import Typography from "@material-ui/core/Typography";
 
 export interface SignUpProps {
   handleSignUp: (signUpVars: {
@@ -16,17 +16,23 @@ export interface SignUpProps {
     email: string;
     password: string;
   }) => any;
+  hideTabs?: boolean;
+  gobackToSignIn: () => any;
 }
 
 const INITIAL = { text: "", error: "" };
 
-const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
+const SignUp: React.FC<SignUpProps> = ({
+  handleSignUp,
+  gobackToSignIn,
+  hideTabs,
+}) => {
   const [name, setName] = React.useState(INITIAL);
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (typeof handleSignUp !== "function") handleSignUp = () => {};
 
     return handleSignUp({
@@ -103,6 +109,17 @@ const SignUp: React.FC<SignUpProps> = ({ handleSignUp }) => {
           Register
         </Button>
       </FormControl>
+      {hideTabs && (
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          align="center"
+          style={{ cursor: "pointer" }}
+          onClick={gobackToSignIn}
+        >
+          Go back to Login
+        </Typography>
+      )}
     </Box>
   );
 };

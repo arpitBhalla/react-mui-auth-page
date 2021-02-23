@@ -64,15 +64,20 @@ const App = () => {
   let props = {
     open,
     onClose() {
-      () => setOpen(false);
+      setOpen(false);
     },
+    logoName: "My Logo",
+    // logoComponent: <>ITS ME</>,
     handleSignUp,
     handleForget,
     handleSignIn,
     handleSocial: {
       Linkedin: handleLinkedIn,
       Github: handleGithub,
+      Facebook: () => {},
+      Twitter: () => {},
     },
+    hideTabs: true,
   };
   switch (mode) {
     case "1":

@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 interface DialogProps extends AuthProps {
   open: boolean;
@@ -14,6 +16,7 @@ interface DialogProps extends AuthProps {
 export const DialogAuth: React.FC<DialogProps> = ({
   open,
   onClose,
+
   ...props
 }) => {
   return (
@@ -24,6 +27,13 @@ export const DialogAuth: React.FC<DialogProps> = ({
       onClose={onClose}
       aria-labelledby="auth dialog"
     >
+      <IconButton
+        aria-label=""
+        style={{ alignSelf: "flex-end" }}
+        onClick={onClose}
+      >
+        <CloseIcon color="action" />
+      </IconButton>
       <DialogContent>
         <TabAuth {...props} />
       </DialogContent>
