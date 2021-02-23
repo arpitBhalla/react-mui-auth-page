@@ -1,7 +1,7 @@
 {
   "name": "react-mui-auth-page",
   "version": "1.2.2",
-  "description": "React Auth for fast Development",
+  "description": "React Login/SignUp components Library backed by Material UI for fast Development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -12,7 +12,7 @@
     "predevDeploy": "parcel build example/index.html --no-source-maps -d build",
     "devDeploy": "cd build && echo 'https://react-mui-auth-page.surge.sh'> CNAME && surge .",
     "postdevDeploy": "rm -rf build",
-    "prepublish": "tsc"
+    "dumpVersion": " node scripts/dump-version.js"
   },
   "repository": {
     "type": "git",
