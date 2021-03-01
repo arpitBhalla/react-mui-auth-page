@@ -17,12 +17,15 @@ export interface SignUpProps {
     password: string;
   }) => any;
   hideTabs?: boolean;
+}
+
+interface NaviProps {
   gobackToSignIn: () => any;
 }
 
 const INITIAL = { text: "", error: "" };
 
-const SignUp: React.FC<SignUpProps> = ({
+const SignUp: React.FC<SignUpProps & NaviProps> = ({
   handleSignUp,
   gobackToSignIn,
   hideTabs,

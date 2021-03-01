@@ -45,20 +45,22 @@ const App = () => {
         <Typography align="center" variant="h4" color="primary">
           <b>react-mui-auth-page</b>
         </Typography>
-        {["Dialog", "FullWidth", "Box Container"].map((_, key) => (
-          <Box key={key} p={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                window.location.href = `?q=${key + 1}`;
-              }}
-              style={{ textTransform: "none" }}
-            >
-              {_}
-            </Button>
-          </Box>
-        ))}
+        {["Dialog", "Dialog Without Tabs", "FullWidth", "Box Container"].map(
+          (_, key) => (
+            <Box key={key} p={1}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  window.location.href = `?q=${key + 1}`;
+                }}
+                style={{ textTransform: "none" }}
+              >
+                {_}
+              </Button>
+            </Box>
+          )
+        )}
       </Box>
     );
   let props = {
@@ -67,7 +69,6 @@ const App = () => {
       setOpen(false);
     },
     logoName: "My Logo",
-    // logoComponent: <>ITS ME</>,
     handleSignUp,
     handleForget,
     handleSignIn,
@@ -77,14 +78,15 @@ const App = () => {
       Facebook: () => {},
       Twitter: () => {},
     },
-    hideTabs: true,
   };
   switch (mode) {
     case "1":
       return <DialogAuth {...props} />;
     case "2":
-      return <FullWidthAuth {...props} />;
+      return <DialogAuth {...{ ...props, hideTabs: true }} />;
     case "3":
+      return <FullWidthAuth {...props} />;
+    case "4":
       return <BoxAuth {...props} />;
     default:
       return null;

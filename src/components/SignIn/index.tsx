@@ -16,20 +16,22 @@ import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
 
 export interface SignInProps {
   handleSignIn: (signInVars: { email: string; password: string }) => any;
+  hideTabs?: boolean;
   handleSocial: {
     Github?: () => void;
     Linkedin?: () => void;
     Twitter?: () => void;
     Facebook?: () => void;
   };
-  hideTabs?: boolean;
+}
+interface NaviProps {
   goToForget: () => any;
   goToSignUp: () => any;
 }
 
 const INITIAL = { text: "", error: "" };
 
-const SignIn: React.FC<SignInProps> = ({
+const SignIn: React.FC<SignInProps & NaviProps> = ({
   goToForget,
   handleSignIn,
   goToSignUp,

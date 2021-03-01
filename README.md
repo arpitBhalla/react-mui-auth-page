@@ -57,23 +57,37 @@ import { DialogAuth, BoxAuth, FullWidthAuth } from "react-mui-auth-page";
 import React from "react";
 import { DialogAuth } from "react-mui-auth-page";
 
-const MyDialogComponent = () => {
+const MyDialogAuthComponent = () => {
+  const handleSignIn = ({ email, password }) => {
+    console.log({ email, password });
+  };
+  const handleSignUp = ({ email, name, password }) => {
+    console.log({ email, name, password });
+  };
+  const handleForget = ({ email }) => {
+    console.log({ email });
+  };
+
+  const handleSocial = {
+    Linkedin: () => {},
+    Github: () => {},
+    FaceBook: () => {},
+    Twitter: () => {},
+  };
+
   return (
     <DialogAuth
       open={true}
-      onClose={() => {}}
-      handleSignUp={() => {}}
-      handleForget={() => {}}
-      handleSignIn={() => {}}
-      handleSocial={{
-        Linkedin: () => {},
-        Github: () => {},
-      }}
+      onClose={handleClose}
+      handleSignUp={handleSignUp}
+      handleForget={handleForget}
+      handleSignIn={handleSignIn}
+      handleSocial={handleSocial}
     />
   );
 };
 
-export default MyDialogComponent;
+export default MyDialogAuthComponent;
 ```
 
 ## Local Run

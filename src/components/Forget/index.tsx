@@ -10,12 +10,17 @@ import BackIcon from "@material-ui/icons/ArrowBackOutlined";
 
 export interface ForgetProps {
   handleForget: (forgetVars: { email: string }) => any;
+}
+interface NaviProps {
   gobackToSignIn: () => any;
 }
 
 const INITIAL = { text: "", error: "" };
 
-const Forget: React.FC<ForgetProps> = ({ gobackToSignIn, handleForget }) => {
+const Forget: React.FC<ForgetProps & NaviProps> = ({
+  gobackToSignIn,
+  handleForget,
+}) => {
   const [email, setEmail] = React.useState(INITIAL);
 
   const handleSubmit = (): void => {
