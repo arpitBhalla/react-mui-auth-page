@@ -1,6 +1,7 @@
 # Changelogs
 
-##### v1.4.2 - March 3rd 2021
+##### v1.5.0 - March 3rd 2021
 
-- Added Async Handlers
-- Added Google Login Button
+- Added
+  - Async Handlers
+  - Google Login Button
