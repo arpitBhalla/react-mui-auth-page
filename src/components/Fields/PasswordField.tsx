@@ -39,7 +39,12 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
           endAdornment: (
             <InputAdornment position="end">
               <IconButton aria-label="toggle password" onClick={tooglePassword}>
-                {!showPassword ? <HiddenPasswordIcon /> : <ShownPasswordIcon />}
+                {React.createElement(
+                  showPassword ? ShownPasswordIcon : HiddenPasswordIcon,
+                  {
+                    color: password.error ? "error" : "action",
+                  }
+                )}
               </IconButton>
             </InputAdornment>
           ),

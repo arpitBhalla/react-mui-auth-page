@@ -14,7 +14,7 @@ import PasswordField from "./../Fields/PasswordField";
 
 const Social = {
   Github: {
-    color: "#55acee",
+    color: "#131418",
     icon: GitHubIcon,
   },
   Linkedin: {
@@ -29,12 +29,23 @@ const Social = {
     color: "#3b5999",
     icon: FacebookIcon,
   },
+  Google: {
+    color: "red",
+    icon: () => (
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1004px-Google_%22G%22_Logo.svg.png"
+        width={20}
+        height={20}
+      />
+    ),
+  },
 };
 
 export interface SignInProps {
   handleSignIn: (signInVars: { email: string; password: string }) => any;
   hideTabs?: boolean;
   handleSocial: {
+    Google?: () => void;
     Github?: () => void;
     Linkedin?: () => void;
     Twitter?: () => void;
@@ -59,17 +70,26 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
+  const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async () => {
+    if (email.text === "") {
+      setEmail({ ...email, error: "This field is required" });
+    }
+    if (password.text === "") {
+      setPassword({ ...password, error: "Email Required" });
+    }
+    if (email.error || password.error) return;
+    setLoading(true);
     if (typeof handleSignIn !== "function") handleSignIn = () => {};
-
-    return handleSignIn({ email: email.text, password: password.text });
+    await handleSignIn({ email: email.text, password: password.text });
+    setLoading(false);
   };
   return (
     <Box p={2}>
       <FormControl margin="none" fullWidth error={Boolean(email.error)}>
         <TextField
-          variant="filled"
+          variant={textFieldVariant}
           label="Email"
           value={email.text}
           onChange={(e) => {
@@ -96,6 +116,7 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
           onClick={handleSubmit}
           style={{ textTransform: "none" }}
           size="large"
+          disabled={loading}
           variant="contained"
           color="primary"
           fullWidth
@@ -111,7 +132,12 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
       )}
       <Box display="flex" justifyContent="center">
         {Object.entries(handleSocial).map(([key, handler]) => {
-          if (typeof handler !== "function") return null;
+          if (
+            typeof handler !== "function" ||
+            !Social[key] ||
+            !Social[key].icon
+          )
+            return null;
           return (
             <IconButton
               key={key}

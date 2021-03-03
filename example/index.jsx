@@ -21,22 +21,25 @@ const App = () => {
   let mode = Array.from(window.location.href.match(/\?q=(.*)/) || [])[1] || 0;
   React.useEffect(() => {}, [mode]);
 
+  const wait = (m) => {
+    console.log(m + " started");
+    return new Promise((r) => {
+      setTimeout(() => {
+        console.log(m);
+        r();
+      }, 3000);
+    });
+  };
   const [open, setOpen] = React.useState(true);
 
-  const handleSignIn = ({ email, password }) => {
-    console.log({ email, password });
+  const handleSignIn = async ({ email, password }) => {
+    await wait("SignIn");
   };
-  const handleSignUp = ({ email, name, password }) => {
-    console.log({ email, name, password });
+  const handleSignUp = async ({ email, name, password }) => {
+    await wait("SignUp");
   };
-  const handleForget = ({ email }) => {
-    console.log({ email });
-  };
-  const handleLinkedIn = () => {
-    console.log("Do Linkedin call");
-  };
-  const handleGithub = () => {
-    console.log("Do Github call");
+  const handleForget = async ({ email }) => {
+    await wait("Forget");
   };
 
   if (mode == 0)
@@ -71,11 +74,11 @@ const App = () => {
     logoName: "My Logo",
     handleSignUp,
     handleForget,
+    textFieldVariant: "outlined",
     handleSignIn,
     handleSocial: {
-      Linkedin: handleLinkedIn,
-      Github: handleGithub,
-      Facebook: () => {},
+      Google: () => {},
+      Github: () => {},
       Twitter: () => {},
     },
   };
