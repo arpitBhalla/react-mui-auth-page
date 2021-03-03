@@ -33,7 +33,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (typeof handleSignUp !== "function") handleSignUp = () => {};
 
     return handleSignUp({

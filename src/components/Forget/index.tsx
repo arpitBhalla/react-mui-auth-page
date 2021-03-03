@@ -25,7 +25,7 @@ const Forget: React.FC<ForgetProps & NaviProps> = ({
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
 
-  const handleSubmit = (): void => {
+  const handleSubmit = async () => {
     if (typeof handleForget !== "function") handleForget = () => {};
     return handleForget({ email: email.text });
   };

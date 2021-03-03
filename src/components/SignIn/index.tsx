@@ -1,7 +1,5 @@
 import * as React from "react";
-import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import TwitterIcon from "@material-ui/icons/Twitter";
@@ -10,7 +8,10 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
+import EmailField from "./../Fields/EmailField";
 import PasswordField from "./../Fields/PasswordField";
+
+type InitialType = { text: string; error: string };
 
 const Social = {
   Github: {
@@ -52,13 +53,15 @@ export interface SignInProps {
     Facebook?: () => void;
   };
   textFieldVariant?: "outlined" | "filled" | "standard";
+  emailValidator?: (value: string) => boolean;
+  passwordValidator?: (value: string) => boolean;
 }
 interface NaviProps {
   goToForget: () => any;
   goToSignUp: () => any;
 }
 
-const INITIAL = { text: "", error: "" };
+const INITIAL: InitialType = { text: "", error: "" };
 
 const SignIn: React.FC<SignInProps & NaviProps> = ({
   goToForget,
@@ -67,19 +70,21 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
   handleSocial,
   hideTabs = false,
   textFieldVariant = "filled",
+  emailValidator = (e) => !!e,
+  passwordValidator = (e) => !!e,
 }) => {
-  const [email, setEmail] = React.useState(INITIAL);
+  const [email, setEmail] = React.useState<InitialType>(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
   const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async () => {
-    if (email.text === "") {
-      setEmail({ ...email, error: "This field is required" });
-    }
-    if (password.text === "") {
-      setPassword({ ...password, error: "Email Required" });
-    }
-    if (email.error || password.error) return;
+    if (
+      ![
+        checkValid(email, setEmail, emailValidator),
+        checkValid(password, setPassword, passwordValidator),
+      ].every((v) => v)
+    )
+      return;
     setLoading(true);
     if (typeof handleSignIn !== "function") handleSignIn = () => {};
     await handleSignIn({ email: email.text, password: password.text });
@@ -87,19 +92,10 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
   };
   return (
     <Box p={2}>
-      <FormControl margin="none" fullWidth error={Boolean(email.error)}>
-        <TextField
-          variant={textFieldVariant}
-          label="Email"
-          value={email.text}
-          onChange={(e) => {
-            setEmail({ text: e.target.value, error: "" });
-          }}
-          error={Boolean(email.error)}
-        />
-        <FormHelperText>{email.error || " "}</FormHelperText>
-      </FormControl>
-      <PasswordField {...{ password, setPassword, textFieldVariant }} />
+      <EmailField {...{ email, setEmail, textFieldVariant, loading }} />
+      <PasswordField
+        {...{ password, setPassword, textFieldVariant, loading }}
+      />
 
       <Typography
         variant="body2"
@@ -166,3 +162,19 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
   );
 };
 export default SignIn;
+
+const checkValid = (
+  value: InitialType,
+  setValue: React.Dispatch<React.SetStateAction<InitialType>>,
+  validator: (val: string) => boolean
+): boolean => {
+  if (!value.text) {
+    setValue({ ...value, error: "This is required" });
+    return false;
+  }
+  if (typeof validator === "function" && !validator(value.text)) {
+    setValue({ ...value, error: "This is invalid" });
+    return false;
+  }
+  return true;
+};

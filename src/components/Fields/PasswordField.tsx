@@ -6,36 +6,44 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
 import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
+import LockIcon from "@material-ui/icons/LockOpen";
 
 export interface PasswordFieldProps {
   password: { text: string; error: string };
   setPassword: (props: { text: string; error: string }) => void;
   textFieldVariant?: "outlined" | "filled" | "standard";
+  loading: boolean;
 }
 
 const PasswordField: React.FC<PasswordFieldProps> = ({
   password,
   setPassword,
   textFieldVariant = "filled",
+  loading,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const tooglePassword = () => {
     setShowPassword(!showPassword);
   };
-
   return (
     <FormControl margin="none" fullWidth error={Boolean(password.error)}>
       <TextField
-        label="Password"
+        placeholder="Password"
         error={Boolean(password.error)}
         variant={textFieldVariant}
         value={password.text}
+        disabled={loading}
         onChange={(e) => {
           setPassword({ text: e.target.value, error: "" });
         }}
         type={!showPassword ? "password" : "text"}
         InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockIcon color={password.error ? "error" : "action"} />
+            </InputAdornment>
+          ),
           endAdornment: (
             <InputAdornment position="end">
               <IconButton aria-label="toggle password" onClick={tooglePassword}>
@@ -54,4 +62,4 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
     </FormControl>
   );
 };
-export default PasswordField;
+export default React.memo(PasswordField);

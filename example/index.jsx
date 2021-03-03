@@ -71,7 +71,11 @@ const App = () => {
     onClose() {
       setOpen(false);
     },
-    logoName: "My Logo",
+    logoComponent: (
+      <Typography variant="h5" color="primary">
+        <b>My App</b>
+      </Typography>
+    ),
     textFieldVariant: "outlined",
     handleSignUp,
     handleForget,
