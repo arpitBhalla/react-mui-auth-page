@@ -10,6 +10,7 @@ import BackIcon from "@material-ui/icons/ArrowBackOutlined";
 
 export interface ForgetProps {
   handleForget: (forgetVars: { email: string }) => any;
+  textFieldVariant?: "outlined" | "filled" | "standard";
 }
 interface NaviProps {
   gobackToSignIn: () => any;
@@ -20,6 +21,7 @@ const INITIAL = { text: "", error: "" };
 const Forget: React.FC<ForgetProps & NaviProps> = ({
   gobackToSignIn,
   handleForget,
+  textFieldVariant = "filled",
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
 
@@ -38,7 +40,7 @@ const Forget: React.FC<ForgetProps & NaviProps> = ({
         </Typography>
         <FormControl margin="normal" fullWidth error={Boolean(email.error)}>
           <TextField
-            variant="filled"
+            variant={textFieldVariant}
             label="Email"
             value={email.text}
             onChange={(e) => {

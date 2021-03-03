@@ -3,12 +3,9 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Box from "@material-ui/core/Box";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
-import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
 import Typography from "@material-ui/core/Typography";
+import PasswordField from "./../Fields/PasswordField";
 
 export interface SignUpProps {
   handleSignUp: (signUpVars: {
@@ -17,6 +14,7 @@ export interface SignUpProps {
     password: string;
   }) => any;
   hideTabs?: boolean;
+  textFieldVariant?: "outlined" | "filled" | "standard";
 }
 
 interface NaviProps {
@@ -28,12 +26,12 @@ const INITIAL = { text: "", error: "" };
 const SignUp: React.FC<SignUpProps & NaviProps> = ({
   handleSignUp,
   gobackToSignIn,
+  textFieldVariant = "filled",
   hideTabs,
 }) => {
   const [name, setName] = React.useState(INITIAL);
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
-  const [showPassword, setShowPassword] = React.useState(false);
 
   const handleSubmit = () => {
     if (typeof handleSignUp !== "function") handleSignUp = () => {};
@@ -45,14 +43,11 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
     });
   };
 
-  const tooglePassword = () => {
-    setShowPassword(!showPassword);
-  };
   return (
     <Box p={2}>
       <FormControl margin="none" fullWidth error={Boolean(name.error)}>
         <TextField
-          variant="filled"
+          variant={textFieldVariant}
           label="Full Name"
           value={name.text}
           onChange={(e) => {
@@ -64,7 +59,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
       </FormControl>
       <FormControl margin="none" fullWidth error={Boolean(email.error)}>
         <TextField
-          variant="filled"
+          variant={textFieldVariant}
           label="Email"
           value={email.text}
           onChange={(e) => {
@@ -74,31 +69,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
         />
         <FormHelperText>{email.error || " "}</FormHelperText>
       </FormControl>
-      <FormControl margin="none" fullWidth error={Boolean(password.error)}>
-        <TextField
-          label="Password"
-          error={Boolean(password.error)}
-          variant="filled"
-          value={password.text}
-          onChange={(e) => {
-            setPassword({ text: e.target.value, error: "" });
-          }}
-          type={!showPassword ? "password" : "text"}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton aria-label="show password" onClick={tooglePassword}>
-                  {!showPassword ? (
-                    <HiddenPasswordIcon />
-                  ) : (
-                    <ShownPasswordIcon />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-      </FormControl>
+      <PasswordField {...{ password, setPassword, textFieldVariant }} />
 
       <FormControl margin="normal" fullWidth>
         <Button

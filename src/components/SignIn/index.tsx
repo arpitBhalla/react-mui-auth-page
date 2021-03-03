@@ -10,9 +10,26 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import LinkedInIcon from "@material-ui/icons/LinkedIn";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import HiddenPasswordIcon from "@material-ui/icons/VisibilityOutlined";
-import ShownPasswordIcon from "@material-ui/icons/VisibilityOffOutlined";
+import PasswordField from "./../Fields/PasswordField";
+
+const Social = {
+  Github: {
+    color: "#55acee",
+    icon: GitHubIcon,
+  },
+  Linkedin: {
+    color: "#0077B5",
+    icon: LinkedInIcon,
+  },
+  Twitter: {
+    color: "#55acee",
+    icon: TwitterIcon,
+  },
+  Facebook: {
+    color: "#3b5999",
+    icon: FacebookIcon,
+  },
+};
 
 export interface SignInProps {
   handleSignIn: (signInVars: { email: string; password: string }) => any;
@@ -23,6 +40,7 @@ export interface SignInProps {
     Twitter?: () => void;
     Facebook?: () => void;
   };
+  textFieldVariant?: "outlined" | "filled" | "standard";
 }
 interface NaviProps {
   goToForget: () => any;
@@ -37,18 +55,15 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
   goToSignUp,
   handleSocial,
   hideTabs = false,
+  textFieldVariant = "filled",
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [password, setPassword] = React.useState(INITIAL);
-  const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleSubmit = (): void => {
+  const handleSubmit = async () => {
     if (typeof handleSignIn !== "function") handleSignIn = () => {};
 
     return handleSignIn({ email: email.text, password: password.text });
-  };
-  const tooglePassword = () => {
-    setShowPassword(!showPassword);
   };
   return (
     <Box p={2}>
@@ -64,41 +79,17 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
         />
         <FormHelperText>{email.error || " "}</FormHelperText>
       </FormControl>
-      <FormControl margin="none" fullWidth error={Boolean(password.error)}>
-        <TextField
-          label="Password"
-          error={Boolean(password.error)}
-          variant="filled"
-          value={password.text}
-          onChange={(e) => {
-            setPassword({ text: e.target.value, error: "" });
-          }}
-          type={!showPassword ? "password" : "text"}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton aria-label="show password" onClick={tooglePassword}>
-                  {!showPassword ? (
-                    <HiddenPasswordIcon />
-                  ) : (
-                    <ShownPasswordIcon />
-                  )}
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
-        />
-        <FormHelperText>{password.error || " "}</FormHelperText>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          align="right"
-          style={{ cursor: "pointer" }}
-          onClick={goToForget}
-        >
-          Forget Password?
-        </Typography>
-      </FormControl>
+      <PasswordField {...{ password, setPassword, textFieldVariant }} />
+
+      <Typography
+        variant="body2"
+        color="textSecondary"
+        align="right"
+        style={{ cursor: "pointer" }}
+        onClick={goToForget}
+      >
+        Forget Password?
+      </Typography>
 
       <FormControl margin="normal" fullWidth>
         <Button
@@ -112,41 +103,27 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
           Sign In
         </Button>
       </FormControl>
-      {(typeof handleSocial?.Twitter === "function" ||
-        typeof handleSocial?.Facebook === "function" ||
-        typeof handleSocial?.Linkedin === "function" ||
-        typeof handleSocial?.Github === "function") && (
+
+      {Object.values(handleSocial).some((v) => typeof v === "function") && (
         <Typography variant="subtitle2" color="textSecondary" align="center">
           or continue with
         </Typography>
       )}
       <Box display="flex" justifyContent="center">
-        {typeof handleSocial?.Twitter === "function" && (
-          <IconButton aria-label="google login" onClick={handleSocial?.Twitter}>
-            <TwitterIcon htmlColor="#55acee" />
-          </IconButton>
-        )}
-        {typeof handleSocial?.Facebook === "function" && (
-          <IconButton
-            aria-label="google login"
-            onClick={handleSocial?.Facebook}
-          >
-            <FacebookIcon htmlColor="#3b5999" />
-          </IconButton>
-        )}
-        {typeof handleSocial?.Linkedin === "function" && (
-          <IconButton
-            aria-label="google login"
-            onClick={handleSocial?.Linkedin}
-          >
-            <LinkedInIcon htmlColor="#0077B5" />
-          </IconButton>
-        )}
-        {typeof handleSocial?.Github === "function" && (
-          <IconButton aria-label="google login" onClick={handleSocial?.Github}>
-            <GitHubIcon htmlColor="#131418" />
-          </IconButton>
-        )}
+        {Object.entries(handleSocial).map(([key, handler]) => {
+          if (typeof handler !== "function") return null;
+          return (
+            <IconButton
+              key={key}
+              aria-label={`${key} login button`}
+              onClick={handler}
+            >
+              {React.createElement(Social[key].icon, {
+                htmlColor: Social[key].color,
+              })}
+            </IconButton>
+          );
+        })}
       </Box>
       {hideTabs && (
         <Typography
