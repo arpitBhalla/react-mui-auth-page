@@ -72,9 +72,9 @@ const App = () => {
       setOpen(false);
     },
     logoName: "My Logo",
+    textFieldVariant: "outlined",
     handleSignUp,
     handleForget,
-    textFieldVariant: "outlined",
     handleSignIn,
     handleSocial: {
       Google: () => {},

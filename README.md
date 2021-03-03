@@ -15,31 +15,8 @@
 ## Usage
 
 ```js
-import { DialogAuth, BoxAuth, FullWidthAuth } from "react-mui-auth-page";
+import { DialogAuth } from "react-mui-auth-page";
 ```
-
-## API's
-
-| Prop Name     | Type                            | Required | Default Value |
-| ------------- | ------------------------------- | -------- | ------------- |
-| hideTabs      | Boolean                         | Yes      | False         |
-| open          | Boolean                         | Yes      |               |
-| onClose       | Function                        | Yes      |               |
-| logoName      | string                          |          |               |
-| logoComponent | React Children                  |          |               |
-| handleSignUp  | Function                        | Yes      |
-| handleForget  | Function                        | Yes      |
-| handleSignIn  | Function                        | Yes      |
-| handleSocial  | [Social Object](#Social-Object) |
-
-### Social Object
-
-| Prop Name | Type     |
-| --------- | -------- |
-| Linkedin  | Function |
-| Github    | Function |
-| Facebook  | Function |
-| Twitter   | Function |
 
 ## ScreenShots
 
@@ -51,7 +28,32 @@ import { DialogAuth, BoxAuth, FullWidthAuth } from "react-mui-auth-page";
 
 <img src='./example/Dialog without Tabs.png'>
 
-#### Dialog
+## API
+
+| Prop Name        | Type                                 | Required | Default Value |
+| ---------------- | ------------------------------------ | -------- | ------------- |
+| hideTabs         | Boolean                              | Yes      | False         |
+| textFieldVariant | "outlined" or "filled" or "standard" | No       | filled        |
+| open             | Boolean                              | Yes      |               |
+| onClose          | Function                             | Yes      |               |
+| logoName         | string                               |          |               |
+| logoComponent    | React Children                       |          |               |
+| handleSignUp     | Function                             | Yes      |
+| handleForget     | Function                             | Yes      |
+| handleSignIn     | Function                             | Yes      |
+| handleSocial     | [Social Object](#Social-Object)      |
+
+### Social Object
+
+| Prop Name | Type     |
+| --------- | -------- |
+| Google    | Function |
+| Linkedin  | Function |
+| Github    | Function |
+| Facebook  | Function |
+| Twitter   | Function |
+
+### Example
 
 ```js
 import React from "react";
@@ -69,10 +71,8 @@ const MyDialogAuthComponent = () => {
   };
 
   const handleSocial = {
-    Linkedin: () => {},
+    Google: () => {},
     Github: () => {},
-    FaceBook: () => {},
-    Twitter: () => {},
   };
 
   return (
