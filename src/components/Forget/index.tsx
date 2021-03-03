@@ -11,7 +11,7 @@ import checkValid from "../../util/checkvalid";
 export interface ForgetProps {
   handleForget: (forgetVars: { email: string }) => any;
   textFieldVariant?: "outlined" | "filled" | "standard";
-  emailValidator: (value: string) => boolean;
+  emailValidator?: (value: string) => boolean;
 }
 interface NaviProps {
   gobackToSignIn: () => any;
@@ -23,7 +23,7 @@ const Forget: React.FC<ForgetProps & NaviProps> = ({
   gobackToSignIn,
   handleForget,
   textFieldVariant = "filled",
-  emailValidator,
+  emailValidator = (e) => !!e,
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [loading, setLoading] = React.useState(false);
@@ -31,6 +31,7 @@ const Forget: React.FC<ForgetProps & NaviProps> = ({
   const handleSubmit = async () => {
     if (!checkValid(email, setEmail, emailValidator)) return;
     if (typeof handleForget !== "function") handleForget = () => {};
+    setLoading(true);
     return handleForget({ email: email.text });
   };
   return (

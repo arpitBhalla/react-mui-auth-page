@@ -50,6 +50,8 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
       return;
     if (typeof handleSignUp !== "function") handleSignUp = () => {};
 
+    setLoading(true);
+
     return handleSignUp({
       name: name.text,
       email: email.text,

@@ -1,6 +1,6 @@
 {
   "name": "react-mui-auth-page",
-  "version": "v1.5.1",
+  "version": "v1.5.2",
   "description": "React Login/SignUp components Library backed by Material UI for fast Development",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
