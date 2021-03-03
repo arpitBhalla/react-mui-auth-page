@@ -6,6 +6,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PasswordField from "./../Fields/PasswordField";
+import EmailField from "./../Fields/EmailField";
 
 export interface SignUpProps {
   handleSignUp: (signUpVars: {
@@ -31,6 +32,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
 }) => {
   const [name, setName] = React.useState(INITIAL);
   const [email, setEmail] = React.useState(INITIAL);
+  const [loading, setLoading] = React.useState(false);
   const [password, setPassword] = React.useState(INITIAL);
 
   const handleSubmit = async () => {
@@ -57,19 +59,11 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
         />
         <FormHelperText>{name.error || " "}</FormHelperText>
       </FormControl>
-      <FormControl margin="none" fullWidth error={Boolean(email.error)}>
-        <TextField
-          variant={textFieldVariant}
-          label="Email"
-          value={email.text}
-          onChange={(e) => {
-            setEmail({ text: e.target.value, error: "" });
-          }}
-          error={Boolean(email.error)}
-        />
-        <FormHelperText>{email.error || " "}</FormHelperText>
-      </FormControl>
-      <PasswordField {...{ password, setPassword, textFieldVariant }} />
+      <EmailField {...{ email, setEmail, textFieldVariant, loading }} />
+
+      <PasswordField
+        {...{ password, setPassword, textFieldVariant, loading }}
+      />
 
       <FormControl margin="normal" fullWidth>
         <Button

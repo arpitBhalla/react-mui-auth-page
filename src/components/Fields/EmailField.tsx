@@ -21,7 +21,8 @@ const EmailField: React.FC<EmailFieldProps> = ({
   return (
     <FormControl margin="none" fullWidth error={Boolean(email.error)}>
       <TextField
-        placeholder="Email"
+        placeholder={textFieldVariant === "outlined" ? "Email" : ""}
+        label={textFieldVariant !== "outlined" && "Email"}
         error={Boolean(email.error)}
         variant={textFieldVariant}
         value={email.text}
@@ -31,7 +32,7 @@ const EmailField: React.FC<EmailFieldProps> = ({
         }}
         type={"email"}
         InputProps={{
-          startAdornment: (
+          startAdornment: textFieldVariant === "outlined" && (
             <InputAdornment position="start">
               <EmailIcon color={email.error ? "error" : "action"} />
             </InputAdornment>

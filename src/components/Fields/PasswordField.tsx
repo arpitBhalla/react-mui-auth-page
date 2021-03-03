@@ -29,7 +29,8 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
   return (
     <FormControl margin="none" fullWidth error={Boolean(password.error)}>
       <TextField
-        placeholder="Password"
+        placeholder={textFieldVariant === "outlined" ? "Password" : ""}
+        label={textFieldVariant !== "outlined" && "Password"}
         error={Boolean(password.error)}
         variant={textFieldVariant}
         value={password.text}
@@ -39,7 +40,7 @@ const PasswordField: React.FC<PasswordFieldProps> = ({
         }}
         type={!showPassword ? "password" : "text"}
         InputProps={{
-          startAdornment: (
+          startAdornment: textFieldVariant === "outlined" && (
             <InputAdornment position="start">
               <LockIcon color={password.error ? "error" : "action"} />
             </InputAdornment>
