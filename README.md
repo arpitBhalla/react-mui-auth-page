@@ -66,8 +66,8 @@ const MyDialogAuthComponent = () => {
   const handleSignIn = ({ email, password }) => {
     console.log({ email, password });
   };
-  const handleSignUp = ({ email, name, password }) => {
-    console.log({ email, name, password });
+  const handleSignUp = async ({ email, name, password }) => {
+    await doSomethingAsyn();
   };
   const handleForget = ({ email }) => {
     console.log({ email });
@@ -81,6 +81,7 @@ const MyDialogAuthComponent = () => {
   return (
     <DialogAuth
       open={true}
+      textFieldVariant="outlined"
       onClose={handleClose}
       handleSignUp={handleSignUp}
       handleForget={handleForget}
