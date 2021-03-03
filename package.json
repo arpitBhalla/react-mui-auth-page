@@ -1,5 +1,5 @@
 {
-  "name": "@arpitbhalla/react-mui-auth-page",
+  "name": "react-mui-auth-page",
   "version": "v1.4.1",
   "description": "React Login/SignUp components Library backed by Material UI for fast Development",
   "main": "lib/index.js",
@@ -22,10 +22,10 @@
   "keywords": [
     "React",
     "Material-ui",
-    "Login-page",
+    "Login page",
     "Signin page",
     "SignUp",
-    "Auth-page"
+    "Auth pages"
   ],
   "author": "Arpit Bhalla",
   "license": "MIT",
@@ -50,5 +50,8 @@
     "tsc": "^1.20150623.0",
     "tslint": "^6.1.3",
     "typescript": "^4.2.2"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
