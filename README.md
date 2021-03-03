@@ -30,18 +30,21 @@ import { DialogAuth } from "react-mui-auth-page";
 
 ## API
 
-| Prop Name        | Type                                 | Required | Default Value |
-| ---------------- | ------------------------------------ | -------- | ------------- |
-| hideTabs         | Boolean                              | Yes      | False         |
-| textFieldVariant | "outlined" or "filled" or "standard" | No       | filled        |
-| open             | Boolean                              | Yes      |               |
-| onClose          | Function                             | Yes      |               |
-| logoName         | string                               |          |               |
-| logoComponent    | React Children                       |          |               |
-| handleSignUp     | Function                             | Yes      |
-| handleForget     | Function                             | Yes      |
-| handleSignIn     | Function                             | Yes      |
-| handleSocial     | [Social Object](#Social-Object)      |
+| Prop Name         | Type                                 | Required | Default Value |
+| ----------------- | ------------------------------------ | -------- | ------------- |
+| hideTabs          | Boolean                              | Yes      | False         |
+| textFieldVariant  | "outlined" or "filled" or "standard" | No       | filled        |
+| open              | Boolean                              | Yes      |               |
+| onClose           | Function                             | Yes      |               |
+| logoName          | string                               |          |               |
+| logoComponent     | React Children                       |          |               |
+| handleSignUp      | Function                             | Yes      |
+| handleForget      | Function                             | Yes      |
+| handleSignIn      | Function                             | Yes      |
+| emailValidator    | Function                             |
+| passwordValidator | Function                             |
+| handleSocial      | [Social Object](#Social-Object)      |
+| handleSocial      | [Social Object](#Social-Object)      |
 
 ### Social Object
 

@@ -10,6 +10,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import EmailField from "./../Fields/EmailField";
 import PasswordField from "./../Fields/PasswordField";
+import checkValid from "../../util/checkvalid";
 
 type InitialType = { text: string; error: string };
 
@@ -162,19 +163,3 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
   );
 };
 export default SignIn;
-
-const checkValid = (
-  value: InitialType,
-  setValue: React.Dispatch<React.SetStateAction<InitialType>>,
-  validator: (val: string) => boolean
-): boolean => {
-  if (!value.text) {
-    setValue({ ...value, error: "This is required" });
-    return false;
-  }
-  if (typeof validator === "function" && !validator(value.text)) {
-    setValue({ ...value, error: "This is invalid" });
-    return false;
-  }
-  return true;
-};

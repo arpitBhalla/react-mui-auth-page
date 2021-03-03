@@ -88,9 +88,9 @@ const App = () => {
   };
   switch (mode) {
     case "1":
-      return <DialogAuth {...props} />;
+      return React.createElement(DialogAuth, props);
     case "2":
-      return <DialogAuth {...{ ...props, hideTabs: true }} />;
+      return React.createElement(DialogAuth, { ...props, hideTabs: true });
     case "3":
       return <FullWidthAuth {...props} />;
     case "4":

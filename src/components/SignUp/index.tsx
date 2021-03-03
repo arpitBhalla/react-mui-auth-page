@@ -1,12 +1,12 @@
 import * as React from "react";
-import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PasswordField from "./../Fields/PasswordField";
+import NameField from "./../Fields/NameField";
 import EmailField from "./../Fields/EmailField";
+import checkValid from "../../util/checkvalid";
 
 export interface SignUpProps {
   handleSignUp: (signUpVars: {
@@ -16,6 +16,8 @@ export interface SignUpProps {
   }) => any;
   hideTabs?: boolean;
   textFieldVariant?: "outlined" | "filled" | "standard";
+  emailValidator?: (value: string) => boolean;
+  passwordValidator?: (value: string) => boolean;
 }
 
 interface NaviProps {
@@ -29,6 +31,8 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
   gobackToSignIn,
   textFieldVariant = "filled",
   hideTabs,
+  emailValidator = (e) => !!e,
+  passwordValidator = (e) => !!e,
 }) => {
   const [name, setName] = React.useState(INITIAL);
   const [email, setEmail] = React.useState(INITIAL);
@@ -36,6 +40,14 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
   const [password, setPassword] = React.useState(INITIAL);
 
   const handleSubmit = async () => {
+    if (
+      ![
+        checkValid(name, setName, emailValidator),
+        checkValid(email, setEmail, emailValidator),
+        checkValid(password, setPassword, passwordValidator),
+      ].every((v) => v)
+    )
+      return;
     if (typeof handleSignUp !== "function") handleSignUp = () => {};
 
     return handleSignUp({
@@ -47,18 +59,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
 
   return (
     <Box p={2}>
-      <FormControl margin="none" fullWidth error={Boolean(name.error)}>
-        <TextField
-          variant={textFieldVariant}
-          label="Full Name"
-          value={name.text}
-          onChange={(e) => {
-            setName({ text: e.target.value, error: "" });
-          }}
-          error={Boolean(name.error)}
-        />
-        <FormHelperText>{name.error || " "}</FormHelperText>
-      </FormControl>
+      <NameField {...{ name, setName, textFieldVariant, loading }} />
       <EmailField {...{ email, setEmail, textFieldVariant, loading }} />
 
       <PasswordField

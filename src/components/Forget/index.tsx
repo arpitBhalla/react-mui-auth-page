@@ -6,10 +6,12 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import BackIcon from "@material-ui/icons/ArrowBackOutlined";
 import EmailField from "./../Fields/EmailField";
+import checkValid from "../../util/checkvalid";
 
 export interface ForgetProps {
   handleForget: (forgetVars: { email: string }) => any;
   textFieldVariant?: "outlined" | "filled" | "standard";
+  emailValidator: (value: string) => boolean;
 }
 interface NaviProps {
   gobackToSignIn: () => any;
@@ -21,11 +23,13 @@ const Forget: React.FC<ForgetProps & NaviProps> = ({
   gobackToSignIn,
   handleForget,
   textFieldVariant = "filled",
+  emailValidator,
 }) => {
   const [email, setEmail] = React.useState(INITIAL);
   const [loading, setLoading] = React.useState(false);
 
   const handleSubmit = async () => {
+    if (!checkValid(email, setEmail, emailValidator)) return;
     if (typeof handleForget !== "function") handleForget = () => {};
     return handleForget({ email: email.text });
   };
