@@ -56,7 +56,7 @@ const MyDialogAuthComponent = () => {
 export default MyDialogAuthComponent;
 ```
 
-## API
+## Props
 
 | Prop Name         | Type                                 | Required | Default Value |
 | ----------------- | ------------------------------------ | -------- | ------------- |
