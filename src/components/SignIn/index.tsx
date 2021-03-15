@@ -78,7 +78,7 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
   const [password, setPassword] = React.useState(INITIAL);
   const [loading, setLoading] = React.useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = React.useCallback(async () => {
     if (
       ![
         checkValid(email, setEmail, emailValidator),
@@ -90,7 +90,8 @@ const SignIn: React.FC<SignInProps & NaviProps> = ({
     if (typeof handleSignIn !== "function") handleSignIn = () => {};
     await handleSignIn({ email: email.text, password: password.text });
     setLoading(false);
-  };
+  }, [email, password]);
+
   return (
     <Box p={2}>
       <EmailField {...{ email, setEmail, textFieldVariant, loading }} />

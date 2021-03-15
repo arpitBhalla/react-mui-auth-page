@@ -39,7 +39,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
   const [loading, setLoading] = React.useState(false);
   const [password, setPassword] = React.useState(INITIAL);
 
-  const handleSubmit = async () => {
+  const handleSubmit = React.useCallback(async () => {
     if (
       ![
         checkValid(name, setName, emailValidator),
@@ -57,7 +57,7 @@ const SignUp: React.FC<SignUpProps & NaviProps> = ({
       email: email.text,
       password: password.text,
     });
-  };
+  }, []);
 
   return (
     <Box p={2}>

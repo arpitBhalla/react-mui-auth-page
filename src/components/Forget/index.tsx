@@ -28,12 +28,12 @@ const Forget: React.FC<ForgetProps & NaviProps> = ({
   const [email, setEmail] = React.useState(INITIAL);
   const [loading, setLoading] = React.useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = React.useCallback(async () => {
     if (!checkValid(email, setEmail, emailValidator)) return;
     if (typeof handleForget !== "function") handleForget = () => {};
     setLoading(true);
     return handleForget({ email: email.text });
-  };
+  }, []);
   return (
     <>
       <IconButton aria-label="go back" onClick={gobackToSignIn}>
