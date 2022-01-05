@@ -72,7 +72,10 @@ export default MyDialogAuthComponent;
 | emailValidator    | Function                             |
 | passwordValidator | Function                             |
 | handleSocial      | [Social Object](#Social-Object)      |
+| showScreen        | Number  [0,1,2]                      | No       | 0             |
 
+### showScreen
+The screen to be displayed when first open, 0 = Login, 1 = Register, 2  = Forgot Password.
 ### Social Object
 
 | Prop Name | Type     |
