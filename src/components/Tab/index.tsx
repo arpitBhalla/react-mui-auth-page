@@ -10,15 +10,17 @@ export interface AuthProps extends SignInProps, SignUpProps, ForgetProps {
   hideTabs?: boolean;
   logoComponent?: React.ReactChildren;
   logoName?: string;
+  showScreen?: number;
 }
 
 const App: React.FC<AuthProps> = ({
   hideTabs,
   logoComponent,
   logoName,
+  showScreen = 0,
   ...props
 }) => {
-  const [authIndex, setAuthIndex] = React.useState(0);
+  const [authIndex, setAuthIndex] = React.useState(showScreen);
 
   const tabChange = (event: React.ChangeEvent, tabValue: number): void => {
     event.preventDefault();
